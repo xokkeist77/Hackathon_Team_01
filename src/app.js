@@ -1,11 +1,18 @@
-import { FigureManager } from './modules/figure/figureManager'
-import './styles.css'
+import "./styles.css"
+import {ContextMenu} from "./menu";
 
+const contextMenuInstance = new ContextMenu("menu")
+const menu = document.getElementById('menu');
 
-const figureManager = new FigureManager();
-window.addEventListener("click", () => {
-    figureManager.display()
-});
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        contextMenuInstance.open();
+    })
 
-//setInterval(figureManager.display.bind(FigureManager), 1000);
-//console.log(document.querySelector('body'))
+    document.body.addEventListener('click', event => {
+        if (menu && menu.classList.contains('open') && !menu.contains(event.target)) {
+            contextMenuInstance.close();
+        }
+    })
+})
