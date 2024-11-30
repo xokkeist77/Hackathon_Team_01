@@ -1,5 +1,7 @@
+// import {RandomShape} from "@/modules/randomshape";
+
 export class Module {
-  constructor(type, text) {
+  constructor(type, text, emoji) {
     if (!type) {
       throw new Error('Please specify "type" param')
     }
@@ -8,6 +10,8 @@ export class Module {
     }
     this.type = type
     this.text = text
+    this.emoji = emoji || ''
+
   }
 
   trigger() {
@@ -15,6 +19,6 @@ export class Module {
   }
 
   toHTML() {
-    return `<li class="menu-item" data-type="${this.type}">${this.text}</li>`
+    return `<li class="menu-item" data-type="${this.type}">${this.text}${this.emoji}</li>`
   }
 }
