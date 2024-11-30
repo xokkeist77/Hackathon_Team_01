@@ -1,11 +1,8 @@
-import {Module} from "./core/module";
+import {Module} from "../core/module";
 
 export class RandomShape extends Module {
-    constructor() {
-        super('Ra', 'Создать фигуру');
-    }
 
-    trigger(action, shape) {
+    trigger() {
         this.action()
     }
 

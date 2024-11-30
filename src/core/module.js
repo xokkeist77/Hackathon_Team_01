@@ -1,5 +1,3 @@
-// import {RandomShape} from "@/modules/randomshape";
-
 export class Module {
   constructor(type, text, emoji) {
     if (!type) {

@@ -1,6 +1,10 @@
 import { Menu } from './core/menu'
 import { Module } from './core/module'
-// import {RandomShape} from "@/modules/randomshape";
+import {RandomShape} from "./modules/randomshapes.module";
+import {ClicksModule} from "@/modules/clicks.module";
+import {TimerModule} from "@/modules/timer.module";
+import {SoundModule} from "@/modules/sound.module";
+import {MessageModule} from "@/modules/message.module";
 
 
 export class ContextMenu extends Menu {
@@ -30,10 +34,31 @@ export class ContextMenu extends Menu {
         ];
 
         commands.forEach(command => {
-            const module = new Module(command.type, command.text, command.emoji);
+            let module
+            if (command.type === 'clickCounter') {
+                module = new ClicksModule(command.type, command.text, command.emoji);
+            } else if (command.type === 'createShape') {
+                module = new RandomShape(command.type, command.text, command.emoji);
+            } else if (command.type === 'createTimer') {
+                module = new TimerModule(command.type, command.text, command.emoji);
+            } else if (command.type === 'changeColor') {
+                module = new ClicksModule(command.type, command.text, command.emoji);
+            } else if (command.type === 'playSound') {
+                module = new SoundModule(command.type, command.text, command.emoji);
+            } else if (command.type === 'showMessage') {
+                module = new MessageModule(command.type, command.text, command.emoji);
+            } else {
+                module = new Module(command.type, command.text, command.emoji);
+            }
+
             this.add(module);
             const item = document.createElement('li');
-            item.innerHTML = module.toHTML();
+            if (module.toHTML) {
+                item.innerHTML = module.toHTML();
+            } else {
+                item.textContent = command.text
+            }
+
             item.addEventListener('click', () => this.trigger(module));
             this.menu.appendChild(item);
         });

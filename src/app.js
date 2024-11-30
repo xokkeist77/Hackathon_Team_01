@@ -1,5 +1,5 @@
 import "./styles.css"
-import {ContextMenu} from "@/menu";
+import {ContextMenu} from "./menu";
 
 const contextMenuInstance = new ContextMenu("menu")
 const menu = document.getElementById('menu');
