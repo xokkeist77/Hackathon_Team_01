@@ -1,4 +1,5 @@
-import "./styles.css"
+import './styles.css'
+
 import {ContextMenu} from "./menu";
 
 const contextMenuInstance = new ContextMenu("menu")
@@ -17,6 +18,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 })
-
-
-

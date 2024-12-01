@@ -1,11 +1,9 @@
 import { Menu } from './core/menu'
 import { Module } from './core/module'
+import {ShapeModule} from "./modules/shape.module";
 import {RandomShape} from "./modules/randomshapes.module";
 import {ClicksModule} from "@/modules/clicks.module";
-// import {TimerModule} from "@/modules/timer.module";
 import {SoundModule} from "@/modules/sound.module";
-// import {MessageModule} from "@/modules/message.module";
-
 
 export class ContextMenu extends Menu {
     constructor(selector) {
@@ -38,7 +36,7 @@ export class ContextMenu extends Menu {
             if (command.type === 'clickCounter') {
                 module = new ClicksModule(command.type, command.text, command.emoji);
             } else if (command.type === 'createShape') {
-                module = new RandomShape(command.type, command.text, command.emoji);
+                module = new ShapeModule(command.type, command.text, command.emoji);
             // } else if (command.type === 'createTimer') {
             //     module = new TimerModule(command.type, command.text, command.emoji);
             } else if (command.type === 'changeColor') {
