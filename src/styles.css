@@ -41,7 +41,26 @@ body {
     background: #343434;
 }
 
-.timer {
+
+
+.timer-form{
+    font: bold;
+    font-family: 'Trebuchet MS';
+    border: 4px solid deepskyblue;
+    width: 600pt;
+    padding: 10px;
+    margin: auto;
+    margin-top: 20%;
+}
+
+.timer-form__input-label{
+    
+    font-size: 25px;
+}
+
+
+
+#timer {
     font: bold;
     font-family: 'Trebuchet MS';
     font-size: 15px;
@@ -56,4 +75,14 @@ body {
     position: absolute; top: 5px; right: 5px;
     padding: 5px;
     margin: 5px;
+}
+
+.timer-form__submit-button{
+    font-family: 'Trebuchet MS';
+    font-size: 20px;
+    cursor: pointer;
+
+    border: 1px solid ;
+    border-radius: 5px;
+
 }

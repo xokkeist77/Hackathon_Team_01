@@ -1,12 +1,23 @@
-import "./styles.css";
-import { CountdownTimer } from "./modules/countdownTimer.module.js";
-import { CustomMessage } from "./modules/customMessage.module.js";
+import "./styles.css"
+import {ContextMenu} from "./menu";
+import {FigureManager} from "./modules/shape.module";
 
-// const timer = new CountdownTimer().bind.trigger(this);
-// const customMessage = new CustomMessage();
+const contextMenuInstance = new ContextMenu("menu")
+const menu = document.getElementById('menu');
 
-// document.addEventListener("click", timer);
-// document.addEventListener(
-//   "keydown",
-//   customMessage.trigger()
-// );
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        contextMenuInstance.open();
+    })
+
+    document.body.addEventListener('click', event => {
+        if (menu && menu.classList.contains('open') && !menu.contains(event.target)) {
+            contextMenuInstance.close();
+        }
+    })
+})
+
+
+
