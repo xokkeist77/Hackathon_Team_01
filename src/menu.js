@@ -2,9 +2,9 @@ import { Menu } from './core/menu'
 import { Module } from './core/module'
 import {RandomShape} from "./modules/randomshapes.module";
 import {ClicksModule} from "@/modules/clicks.module";
-import {TimerModule} from "@/modules/timer.module";
+// import {TimerModule} from "@/modules/timer.module";
 import {SoundModule} from "@/modules/sound.module";
-import {MessageModule} from "@/modules/message.module";
+// import {MessageModule} from "@/modules/message.module";
 
 
 export class ContextMenu extends Menu {
@@ -24,7 +24,7 @@ export class ContextMenu extends Menu {
 
     renderCommands() {
         const commands = [
-            { type: 'clickCounter', text: 'Считать клики (за 10 секунд)', emoji: '👆'  },
+            { type: 'clickCounter', text: 'Считать клики (за 3 секунды)', emoji: '👆'  },
             { type: 'createShape', text: 'Создать фигуру', emoji: '🔶' },
             { type: 'createTimer', text: 'Запустить таймер', emoji: '⏱️' },
             { type: 'changeColor', text: 'Поменять цвет', emoji: '🌈' },
@@ -39,14 +39,14 @@ export class ContextMenu extends Menu {
                 module = new ClicksModule(command.type, command.text, command.emoji);
             } else if (command.type === 'createShape') {
                 module = new RandomShape(command.type, command.text, command.emoji);
-            } else if (command.type === 'createTimer') {
-                module = new TimerModule(command.type, command.text, command.emoji);
+            // } else if (command.type === 'createTimer') {
+            //     module = new TimerModule(command.type, command.text, command.emoji);
             } else if (command.type === 'changeColor') {
                 module = new ClicksModule(command.type, command.text, command.emoji);
             } else if (command.type === 'playSound') {
                 module = new SoundModule(command.type, command.text, command.emoji);
-            } else if (command.type === 'showMessage') {
-                module = new MessageModule(command.type, command.text, command.emoji);
+            // } else if (command.type === 'showMessage') {
+            //     module = new MessageModule(command.type, command.text, command.emoji);
             } else {
                 module = new Module(command.type, command.text, command.emoji);
             }
