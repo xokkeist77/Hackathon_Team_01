@@ -34,6 +34,7 @@ export class ContextMenu extends Menu {
         const commands = [
             { type: 'clickCounter', text: 'Считать клики (за 10 секунд)', emoji: '👆'  },
             { type: 'createShape', text: 'Создать фигуру', emoji: '🔶' },
+            { type: 'deleteShape', text: 'Удалить фигуру', emoji: '🔶' },
             { type: 'createTimer', text: 'Запустить таймер', emoji: '⏱️' },
             { type: 'changeColor', text: 'Поменять цвет', emoji: '🌈' },
             { type: 'playSound', text: 'Проиграть звук', emoji: '🎶' },
@@ -47,8 +48,8 @@ export class ContextMenu extends Menu {
             let module
             if (command.type === 'createShape') {
                 module = new ShapeModule(command.type, command.text, command.emoji);
-            // } else if (command.type === 'createShape') {
-            //     module = new ShapeModule(command.type, command.text, command.emoji);
+            } else if (command.type === 'deleteShape') {
+                module = new ShapeModule(command.type, command.text, command.emoji, true);
             // } else if (command.type === 'createTimer') {
             //     module = new ShapeModule(command.type, command.text, command.emoji);
             // } else if (command.type === 'changeColor') {

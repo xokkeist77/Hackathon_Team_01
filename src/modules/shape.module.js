@@ -1,14 +1,20 @@
 import { Module } from '../core/module'
+import { random } from '../../src/utils'
 
 const shapes = {
     circle: 0,
     rectangle: 1,
     polygon: 2,
+    figure: 3,
 }
 export class ShapeModule extends Module {
-    constructor(type, text, emoji) {
+    constructor(type, text, emoji, onlyClean) {
         super(type, text, emoji);
-        this.canvas = document.createElement('canvas');
+        this.onlyClean = onlyClean;
+        this.canvas = document.querySelector('canvas');
+        if (!this.canvas) {
+            this.canvas = document.createElement('canvas');
+        }
         this.ctx = this.canvas.getContext("2d");
     
         this.canvas.width = window.innerWidth - 100;      //ширина canvas
@@ -27,8 +33,8 @@ export class ShapeModule extends Module {
             ctx: this.ctx,
         }
 
-        const shapeType = Math.floor(Math.random()*3);
-
+        const shapeType = this.onlyClean ? shapes.figure : Math.floor(Math.random()*3);
+        
         let figure;
         
         switch(shapeType) {
@@ -41,6 +47,9 @@ export class ShapeModule extends Module {
             case shapes.polygon:
                 figure = new Polygon(props);
                 break;
+            case shapes.figure:
+                figure = new Figure(props);
+                break;
             default: 
                 return;
         }        
@@ -52,21 +61,21 @@ export class ShapeModule extends Module {
 export class Figure {
     constructor (props) {
         this.props = props;
-        this.x = this.randomInRange(0, props.canvas.width);
-        this.y = this.randomInRange(0, props.canvas.height);
-        this.width = this.randomInRange(25, 200); 
-        this.height = this.randomInRange(25, 200);
-        const color = `rgb(${Math.floor(this.randomInRange(0, 256))}, ${Math.floor(this.randomInRange(0, 256))}, ${Math.floor(this.randomInRange(0, 256))})`;
+        this.x = random(0, props.canvas.width);
+        this.y = random(0, props.canvas.height);
+        this.width = random(25, 200); 
+        this.height = random(25, 200);
+        const color = `rgb(${Math.floor(random(0, 256))}, ${Math.floor(random(0, 256))}, ${Math.floor(random(0, 256))})`;
         this.props.ctx.fillStyle = color;
     }
 
-    randomInRange(min, max) {
-        return Math.random() * (max - min) + min;
-    }
+    // randomInRange(min, max) {
+    //     return Math.random() * (max - min) + min;
+    // }
     //очистка canvas и очистка списка подпутей перед отрисовкой новой фигуры
     render() {
         this.props.ctx.clearRect(0, 0, this.props.canvas.width, this.props.canvas.height);
-        this.props.ctx.beginPath();        
+        this.props.ctx.beginPath();
     }
 }
 
@@ -90,7 +99,7 @@ export class Rectangle extends Figure {
 export class Polygon extends Figure {
     render() {
         super.render();
-        const sides = Math.floor(this.randomInRange(3, 8)); 
+        const sides = Math.floor(random(3, 8)); 
         const angle = (Math.PI * 2) / sides;
         this.props.ctx.moveTo(this.x + this.width * Math.cos(0), this.y + this.height * Math.sin(0));
         for (let i = 1; i < sides; i++) {
